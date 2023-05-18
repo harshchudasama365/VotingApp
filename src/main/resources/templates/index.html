@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration and Login App</title>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+</head>
+<body>
+	<!-- create navigation bar ( header) -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">Registration and
+					Login Module</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<br>
+	<br>
+
+	<div class="container">
+		<h1>Registration and Login with Spring Boot, Spring Security,
+			Thymeleaf, Hibernate and MySQL</h1>
+			Welcome <span sec:authentication="principal.username"> User</span>
+		<p th:text="${session.voteList}"></p>
+		
+<!--  		<p th:each="candidate : ${session.voteList}">
+    		<span th:text="${candidate.candidateName}"></span>
+		</p>
+		
+		
+-->
+
+		<form th:action="@{/voteSuccess}"  method="post" th:object="${voteSelectedDto}" >
+		<div class="form-check">
+  			
+  			<br>
+  		<input class="form-check-input" type="radio" value="AAP" id="option2" th:field="*{optionSelected}">
+  			<label class="form-check-label" for="option2" th:text="${session.voteList[0].candidateName}">
+  			</label>
+ 	<br>
+ 
+
+  			<input class="form-check-input" type="radio" value="BJP" id="option2" th:field="*{optionSelected}">
+  			<label class="form-check-label" for="option2" th:text="${session.voteList[1].candidateName}">
+  			</label>
+  			<br>
+	
+  			<input class="form-check-input" type="radio" value="BSP" id="option3" th:field="*{optionSelected}">
+  			<label class="form-check-label" for="option3" th:text="${session.voteList[2].candidateName}">
+   			
+  			</label>
+  			<br>
+
+  			<input class="form-check-input" type="radio" value="Congress" id="option4" th:field="*{optionSelected}">
+  			<label class="form-check-label" for="option4" th:text="${session.voteList[3].candidateName}">
+  		
+  			</label>
+  			
+  
+		</div>
+		<br>
+		<button class="btn btn-primary" type="submit">Submit form</button>
+		</form>
+	</div>
+	
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <!--   
+ <script type="text/javascript">
+   $(document).ready(function(){
+
+      $('.form-check-input').click(function() {
+         $('.form-check-input').not(this).prop('checked', false);
+      });
+
+   });
+   </script>
+   
+ -->
+</body>
+
+
+</html>
